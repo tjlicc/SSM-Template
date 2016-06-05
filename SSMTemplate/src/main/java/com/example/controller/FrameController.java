@@ -9,7 +9,7 @@ public class FrameController {
 	
 	@Scheduled(cron="0/5 * *  * * ? ")
 	public void printMsg() {
-		System.out.println("testa");
+		System.out.println("scheduled annotation test");
 	}
 	
 	@RequestMapping(value="/index")
