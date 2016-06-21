@@ -14,6 +14,17 @@
 	<mvc:annotation-driven />
 	<mvc:resources location="/resources/" mapping="resources/**" />
 
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<!-- 多个拦截器,顺序执行 -->
+		<mvc:interceptor>
+			<!-- 如果不配置或/**,将拦截所有的Controller -->
+			<mvc:mapping path="/**" />
+			<!-- 在界面展示之前做一些通用处理 -->
+			<bean class="com.example.interceptor.PermissionInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
 	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 		<property name="supportedMediaTypes">
 			<list>

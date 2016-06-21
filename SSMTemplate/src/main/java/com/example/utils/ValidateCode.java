@@ -77,16 +77,8 @@ public class ValidateCode {
 		return codeStr;
 	}
 
-	public void setCodeStr(String codeStr) {
-		this.codeStr = codeStr;
-	}
-
 	public BufferedImage getCodeImg() {
 		return codeImg;
-	}
-
-	public void setCodeImg(BufferedImage codeImg) {
-		this.codeImg = codeImg;
 	}
 
 	public static void main(String[] args) throws IOException {
