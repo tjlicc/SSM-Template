@@ -9,15 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.service.inter.UserService;
 import com.example.utils.ValidateCode;
 
 @Controller
 public class FrameController {
 
+	@Autowired
+	private UserService userService;
+	
 	@Scheduled(cron = "0/5 * *  * * ? ")
 	public void printMsg() {
 		System.out.println("scheduled annotation test");
@@ -25,6 +30,7 @@ public class FrameController {
 
 	@RequestMapping(value = "/index")
 	public String doIndex() {
+		System.out.println(userService.selectByPrimaryKey("1"));
 		return "index";
 	}
 
