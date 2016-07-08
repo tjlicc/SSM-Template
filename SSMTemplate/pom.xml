@@ -87,7 +87,8 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>6.0.2</version>
+			<version>5.1.39</version>
+			<!-- 本来想使用6.0以上版本 的，但是经历了很多错误才发现6.0以上版本只支持java8 -->
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
