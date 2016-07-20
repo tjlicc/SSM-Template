@@ -190,7 +190,7 @@
 				<excludes>
 					<exclude>*.properties</exclude>
 				</excludes>
-				<filtering>true</filtering>
+				<filtering>false</filtering>
 				<targetPath>.</targetPath>
 			</resource>
 		</resources>
