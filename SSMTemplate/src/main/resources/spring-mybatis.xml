@@ -40,21 +40,12 @@
 		</property>
 	</bean>
 
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="configLocation" value="classpath:mybatis-configuration.xml" />
-		<property name="mapperLocations" value="classpath*:com/example/mapping/**/*.xml" />
-		<property name="dataSource" ref="dataSource" />
-		<property name="typeAliasesPackage" value="com.example.model" />
-	</bean>
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.example.dao" />
-		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
-	</bean>
-
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
 	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="add*" propagation="REQUIRED" />
@@ -80,7 +71,17 @@
 	</tx:advice>
 	<aop:config>
 		<aop:pointcut id="transactionPointcut" expression="execution(* com.example.service.*.*(..))" />
-		<aop:advisor pointcut-ref="transactionPointcut"
-			advice-ref="transactionAdvice" />
+		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
 	</aop:config>
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis-configuration.xml" />
+		<property name="mapperLocations" value="classpath*:com/example/mapping/**/*.xml" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="typeAliasesPackage" value="com.example.model" />
+	</bean>
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.example.dao" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+	</bean>
 </beans>
