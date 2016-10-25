@@ -3,47 +3,43 @@
 <mapper namespace="com.example.dao.UserDao">
 
 	<resultMap id="UserMap" type="com.example.model.User">
-		<id column="ID" property="id" jdbcType="VARCHAR" />
-		<result column="NAME" property="name" jdbcType="VARCHAR" />
-		<result column="AGE" property="age" jdbcType="DECIMAL" />
-		<result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="age" property="age" jdbcType="DECIMAL" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
 	</resultMap>
 	
-	<sql id="Base_Column_List">
-		ID, NAME, AGE, ADDRESS
+	<sql id="BaseColumnList">
+		id, name, age, address
 	</sql>
-	<select id="selectByPrimaryKey" resultMap="UserMap"
-		parameterType="java.lang.String">
+	<select id="selectByPrimaryKey" resultMap="UserMap" parameterType="java.lang.String">
 		select
-		<include refid="Base_Column_List" />
-		from MUSER
-		where ID = #{id,jdbcType=VARCHAR}
+		<include refid="BaseColumnList" />
+		from user
+		where id = #{id,jdbcType=VARCHAR}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-		delete from MUSER
-		where ID = #{id,jdbcType=VARCHAR}
+		delete from user
+		where id = #{id,jdbcType=VARCHAR}
 	</delete>
 	<insert id="insert" parameterType="User">
-		insert into MUSER (ID, NAME, AGE,
-		ADDRESS)
-		values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
-		#{age,jdbcType=DECIMAL},
-		#{address,jdbcType=VARCHAR})
+		insert into user (id, name, age, address)
+		values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=DECIMAL}, #{address,jdbcType=VARCHAR})
 	</insert>
 	<insert id="insertSelective" parameterType="User">
-		insert into MUSER
+		insert into user
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
-				ID,
+				id,
 			</if>
 			<if test="name != null">
-				NAME,
+				name,
 			</if>
 			<if test="age != null">
-				AGE,
+				age,
 			</if>
 			<if test="address != null">
-				ADDRESS,
+				address,
 			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -62,29 +58,29 @@
 		</trim>
 	</insert>
 	<update id="updateByPrimaryKeySelective" parameterType="User">
-		update MUSER
+		update user
 		<set>
 			<if test="name != null">
-				NAME = #{name,jdbcType=VARCHAR},
+				name = #{name,jdbcType=VARCHAR},
 			</if>
 			<if test="age != null">
-				AGE = #{age,jdbcType=DECIMAL},
+				age = #{age,jdbcType=DECIMAL},
 			</if>
 			<if test="address != null">
-				ADDRESS = #{address,jdbcType=VARCHAR},
+				address = #{address,jdbcType=VARCHAR},
 			</if>
 		</set>
-		where ID = #{id,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=VARCHAR}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="User">
-		update MUSER
-		set NAME = #{name,jdbcType=VARCHAR},
-		AGE = #{age,jdbcType=DECIMAL},
-		ADDRESS = #{address,jdbcType=VARCHAR}
-		where ID = #{id,jdbcType=VARCHAR}
+		update user
+		set name = #{name,jdbcType=VARCHAR},
+		age = #{age,jdbcType=DECIMAL},
+		address = #{address,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=VARCHAR}
 	</update>
 
 	<select id="getAll" resultMap="UserMap">
-		select ID, NAME, AGE, ADDRESS from muser
+		select id, name, age, address from user
 	</select>
 </mapper>

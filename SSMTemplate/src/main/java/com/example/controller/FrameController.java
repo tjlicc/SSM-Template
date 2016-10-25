@@ -9,16 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.model.User;
 import com.example.service.inter.UserService;
 import com.example.utils.ValidateCode;
 
 @Controller
 public class FrameController {
+	
+	private final Logger LOGGER = Logger.getLogger(FrameController.class);
 
 	@Autowired
 	private UserService userService;
@@ -30,7 +34,10 @@ public class FrameController {
 
 	@RequestMapping(value = "/index")
 	public String doIndex() {
-		System.out.println(userService.selectByPrimaryKey("1"));
+		User user = userService.selectByPrimaryKey("1");
+		LOGGER.info(">>user info");
+		LOGGER.info(">>name: " + user.getName());
+		LOGGER.info(">>address: " + user.getAddress());
 		return "index";
 	}
 
