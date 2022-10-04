@@ -22,7 +22,7 @@
 		<jdbc.username>root</jdbc.username>
 		<jdbc.password>example</jdbc.password>
 		
-		<jackson.version>2.10.0</jackson.version>
+		<jackson.version>2.12.6.1</jackson.version>
 	</properties>
 
 	<dependencies>
